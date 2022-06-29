@@ -12,6 +12,21 @@ public class RegistrationPage extends BasePage {
     @FindBy(id = "passwordConfirm")
     private WebElement passwordConfirmElement;
 
+    @FindBy(className = "btn-primary")
+    private WebElement RegisterButtonElement;
+
+    @FindBy(id="username.errors")
+    private WebElement usernameErrorMessageElement;
+
+    @FindBy(id="password.errors")
+    private WebElement registerPasswordErrorMessageElement;
+
+    @FindBy(id="passwordConfirm.errors")
+    private WebElement registerPasswordConfirmErrorMessageElement;
+
+    @FindBy(partialLinkText = "naują paskyrą")
+    private WebElement registerButtonElement;
+
     public RegistrationPage(WebDriver driver) {
         super(driver);
     }
@@ -28,8 +43,24 @@ public class RegistrationPage extends BasePage {
         passwordConfirmElement.sendKeys(text);
     }
 
+    public void clickRegister() {
+        RegisterButtonElement.click();
+    }
+
     public void fillPasswordFields(String text) {
         fillPassword(text);
         fillPasswordConfirm(text);
+    }
+
+    public String getUsernameErrorMessage() {
+        return usernameErrorMessageElement.getText();
+    }
+
+    public String getRegisterPasswordErrorMessage() {
+        return registerPasswordErrorMessageElement.getText();
+    }
+
+    public String getRegisterPasswordConfirmErrorMessage() {
+        return registerPasswordConfirmErrorMessageElement.getText();
     }
 }
