@@ -5,6 +5,8 @@ import org.junit.experimental.categories.Category;
 import static org.junit.Assert.*;
 
 public class LoginTest extends BaseTest {
+    final String loginErrorMessage = "Įvestas prisijungimo vardas ir/ arba slaptažodis yra neteisingi";
+
     LoginPage loginPage = new LoginPage(driver);
     RegistrationPage registrationPage = new RegistrationPage(driver);
     CalculatorPage calculatorPage = new CalculatorPage(driver);
@@ -19,13 +21,27 @@ public class LoginTest extends BaseTest {
         loginPage.fillUsername("test-vartotojas");
         loginPage.fillPassword("slaptazodis");
         loginPage.clickLogin();
+
+        if (loginPage.getTitle().equals("Prisijungimas")) {
+            loginPage.fillUsername("");
+            loginPage.fillPassword("");
+            loginPage.clickLogin();
+            assertEquals(
+                    "User doesn't exist and the error must be shown",
+                    loginErrorMessage,
+                    loginPage.getLoginErrorMessage());
+        } else {
+            assertEquals(
+                    "User exists and user must be redirected to main page",
+                    "Skaičiuotuvas",
+                    calculatorPage.getTitle());
+
+        }
     }
 
     @Test
     @Category(ErrorMessageTests.class)
     public void ShowsLoginError() {
-        final String loginErrorMessage = "Įvestas prisijungimo vardas ir/ arba slaptažodis yra neteisingi";
-
         loginPage.fillUsername("");
         loginPage.fillPassword("");
         loginPage.clickLogin();
