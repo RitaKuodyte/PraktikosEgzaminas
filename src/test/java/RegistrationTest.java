@@ -4,8 +4,9 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class RegistrationTest extends BaseTest {
-    
+
     RegistrationPage registrationPage = new RegistrationPage(driver);
+    CalculatorPage calculatorPage = new CalculatorPage(driver);
 
     @Before
     public void setUp() {
@@ -14,9 +15,21 @@ public class RegistrationTest extends BaseTest {
 
     @Test
     public void UserCanRegister() {
-        registrationPage.fillUsername("vartotojas1");
-        registrationPage.fillPassword("slaptazodis");
+        registrationPage.fillUsername("test-vartotojas");
+        registrationPage.fillPasswordFields("slaptazodis");
         registrationPage.clickRegister();
+
+        if (registrationPage.getTitle().equals("Registracija")) {
+            assertEquals(
+                    "Page must show error message for existing user",
+                    "Toks vartotojo vardas jau egzistuoja",
+                    registrationPage.getUsernameErrorMessage());
+        } else {
+            assertEquals(
+                    "After registration user must be redirected to different page",
+                    "Skaičiuotuvas",
+                    calculatorPage.getTitle());
+        }
     }
 
     @Test
