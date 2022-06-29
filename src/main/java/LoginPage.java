@@ -15,6 +15,9 @@ public class LoginPage extends BasePage {
     @FindBy(partialLinkText = "naują paskyrą")
     private WebElement registerButtonElement;
 
+    @FindBy(xpath = "/html/body/div/form/div/span[2]")
+    private WebElement loginErrorMessageElement;
+
     public LoginPage(WebDriver driver) {
         super(driver);
     }
@@ -33,5 +36,9 @@ public class LoginPage extends BasePage {
 
     public void goToRegisterAccountPage() {
         registerButtonElement.click();
+    }
+
+    public String getLoginErrorMessage() {
+        return loginErrorMessageElement.getText();
     }
 }
