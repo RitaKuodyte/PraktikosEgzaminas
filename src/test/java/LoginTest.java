@@ -8,8 +8,6 @@ public class LoginTest extends BaseTest {
     final String loginErrorMessage = "Įvestas prisijungimo vardas ir/ arba slaptažodis yra neteisingi";
 
     LoginPage loginPage = new LoginPage(driver);
-    RegistrationPage registrationPage = new RegistrationPage(driver);
-    CalculatorPage calculatorPage = new CalculatorPage(driver);
 
     @Before
     public void setUp() {
@@ -22,7 +20,7 @@ public class LoginTest extends BaseTest {
         loginPage.fillPassword("slaptazodis");
         loginPage.clickLogin();
 
-        if (loginPage.getTitle().equals("Prisijungimas")) {
+        if (getPageTitle().equals(LoginPage.PageName)) {
             loginPage.fillUsername("");
             loginPage.fillPassword("");
             loginPage.clickLogin();
@@ -33,9 +31,8 @@ public class LoginTest extends BaseTest {
         } else {
             assertEquals(
                     "User exists and user must be redirected to main page",
-                    "Skaičiuotuvas",
-                    calculatorPage.getTitle());
-
+                    CalculatorPage.PageName,
+                    getPageTitle());
         }
     }
 
@@ -72,10 +69,10 @@ public class LoginTest extends BaseTest {
         loginPage.goToRegisterAccountPage();
         assertEquals(
                 "Page name must match",
-                "Registracija",
-                registrationPage.getTitle());
+                RegistrationPage.PageName,
+                getPageTitle());
         assertTrue(
                 "Url must match",
-                registrationPage.getCurrentUrl().contains("registruoti"));
+                getPageUrl().contains("registruoti"));
     }
 }

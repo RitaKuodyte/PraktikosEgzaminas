@@ -5,9 +5,14 @@ import org.junit.experimental.categories.Category;
 import static org.junit.Assert.*;
 
 public class RegistrationTest extends BaseTest {
+    final String userAlreadyExistsErrorMessage = "Toks vartotojo vardas jau egzistuoja";
+    final String minimumPasswordLenghtErrorMessage = "Šį laukelį būtina užpildyti\n" +
+            "Privaloma įvesti bent 3 simbolius";
+    final String passwordsDoesntMatchErrorMessage = "Įvesti slaptažodžiai nesutampa";
+    final String usernameLenghtErrorMessage = "Šį laukelį būtina užpildyti\n" +
+            "Privaloma įvesti nuo 3 iki 32 simbolių";
 
     RegistrationPage registrationPage = new RegistrationPage(driver);
-    CalculatorPage calculatorPage = new CalculatorPage(driver);
 
     @Before
     public void setUp() {
@@ -20,16 +25,16 @@ public class RegistrationTest extends BaseTest {
         registrationPage.fillPasswordFields("slaptazodis");
         registrationPage.clickRegister();
 
-        if (registrationPage.getTitle().equals("Registracija")) {
+        if (getPageTitle().equals(RegistrationPage.PageName)) {
             assertEquals(
                     "Page must show error message for existing user",
-                    "Toks vartotojo vardas jau egzistuoja",
+                    userAlreadyExistsErrorMessage,
                     registrationPage.getUsernameErrorMessage());
         } else {
             assertEquals(
                     "After registration user must be redirected to different page",
-                    "Skaičiuotuvas",
-                    calculatorPage.getTitle());
+                    CalculatorPage.PageName,
+                    getPageTitle());
         }
     }
 
@@ -42,7 +47,7 @@ public class RegistrationTest extends BaseTest {
         registrationPage.clickRegister();
         assertEquals(
                 "Page must show error message",
-                "Įvesti slaptažodžiai nesutampa",
+                passwordsDoesntMatchErrorMessage,
                 registrationPage.getRegisterPasswordConfirmErrorMessage());
 
         registrationPage.fillUsername("");
@@ -51,7 +56,7 @@ public class RegistrationTest extends BaseTest {
         registrationPage.clickRegister();
         assertEquals(
                 "Page must show error message",
-                "Įvesti slaptažodžiai nesutampa",
+                passwordsDoesntMatchErrorMessage,
                 registrationPage.getRegisterPasswordConfirmErrorMessage());
     }
 
@@ -63,13 +68,11 @@ public class RegistrationTest extends BaseTest {
         registrationPage.clickRegister();
         assertEquals(
                 "Page must show error message",
-                "Šį laukelį būtina užpildyti\n" +
-                        "Privaloma įvesti nuo 3 iki 32 simbolių",
+                usernameLenghtErrorMessage,
                 registrationPage.getUsernameErrorMessage());
         assertEquals(
                 "Page must show error message about minimum symbol count",
-                "Šį laukelį būtina užpildyti\n" +
-                        "Privaloma įvesti bent 3 simbolius",
+                minimumPasswordLenghtErrorMessage,
                 registrationPage.getRegisterPasswordErrorMessage());
 
         registrationPage.fillUsername("vartotojas123");
@@ -78,8 +81,7 @@ public class RegistrationTest extends BaseTest {
         registrationPage.clickRegister();
         assertEquals(
                 "Page must show error message about minimum symbol count",
-                "Šį laukelį būtina užpildyti\n" +
-                        "Privaloma įvesti bent 3 simbolius",
+                minimumPasswordLenghtErrorMessage,
                 registrationPage.getRegisterPasswordErrorMessage());
     }
 
@@ -92,7 +94,7 @@ public class RegistrationTest extends BaseTest {
         registrationPage.clickRegister();
         assertEquals(
                 "Page must show error message for existing user",
-                "Toks vartotojo vardas jau egzistuoja",
+                userAlreadyExistsErrorMessage,
                 registrationPage.getUsernameErrorMessage());
     }
 }

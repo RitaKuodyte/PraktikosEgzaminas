@@ -3,6 +3,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class RegistrationPage extends BasePage {
+    final static public String PageName = "Registracija";
+
     @FindBy(id = "username")
     private WebElement usernameElement;
 

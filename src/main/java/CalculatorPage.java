@@ -3,6 +3,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class CalculatorPage extends BasePage {
+    final static public String PageName = "Skaičiuotuvas";
 
     @FindBy(xpath = "/html/body/nav/div/ul[2]/a")
     private WebElement logoutElement;

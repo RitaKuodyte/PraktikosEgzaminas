@@ -26,6 +26,14 @@ public class BaseTest {
 
     @AfterClass
     public static void tearDownClass() {
-        driver.quit();
+        //driver.quit();
+    }
+
+    public String getPageTitle() {
+        return driver.getTitle();
+    }
+
+    public String getPageUrl() {
+        return driver.getCurrentUrl();
     }
 }

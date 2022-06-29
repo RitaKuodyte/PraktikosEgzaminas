@@ -3,6 +3,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class LoginPage extends BasePage {
+    final static public String PageName = "Prisijungimas";
+
     @FindBy(name = "username")
     private WebElement usernameElement;
 
@@ -17,6 +19,9 @@ public class LoginPage extends BasePage {
 
     @FindBy(xpath = "/html/body/div/form/div/span[2]")
     private WebElement loginErrorMessageElement;
+
+    @FindBy(xpath = "/html/body/div/form/div/span[1]")
+    private WebElement logoutSuccessfulMessageElement;
 
     public LoginPage(WebDriver driver) {
         super(driver);
@@ -40,5 +45,9 @@ public class LoginPage extends BasePage {
 
     public String getLoginErrorMessage() {
         return loginErrorMessageElement.getText();
+    }
+
+    public String getLogoutMessage() {
+        return logoutSuccessfulMessageElement.getText();
     }
 }

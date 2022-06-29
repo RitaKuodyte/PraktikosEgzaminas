@@ -3,14 +3,16 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
+
 public class CalculatorTest extends BaseTest {
+    final String logoutMessage = "Sėkmingai atsijungėte";
 
     CalculatorPage calculatorPage = new CalculatorPage(driver);
     LoginPage loginPage = new LoginPage(driver);
 
     @Before
     public void setUp() {
-        driver.get("http://localhost:8080/skaiciuotuvas");
+        driver.get("http://localhost:8080/");
     }
 
     @BeforeClass
@@ -28,14 +30,19 @@ public class CalculatorTest extends BaseTest {
     public void UserCanLogout() {
         assertEquals(
                 "The main page must be opened",
-                "Skaičiuotuvas",
-                calculatorPage.getTitle());
+                CalculatorPage.PageName,
+                getPageTitle());
 
         calculatorPage.clickLogout();
 
         assertEquals(
                 "After logging out the login page must be shown",
-                "Prisijungimas",
-                loginPage.getTitle());
+                LoginPage.PageName,
+                getPageTitle());
+
+        assertEquals(
+                "Logout message must be shown",
+                logoutMessage,
+                loginPage.getLogoutMessage());
     }
 }
