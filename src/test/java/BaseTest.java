@@ -26,7 +26,7 @@ public class BaseTest {
 
     @AfterClass
     public static void tearDownClass() {
-        //driver.quit();
+        driver.quit();
     }
 
     public String getPageTitle() {
