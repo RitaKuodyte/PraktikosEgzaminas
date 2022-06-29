@@ -13,6 +13,7 @@ public class BaseTest {
     public static void setUpClass() {
         WebDriverManager.edgedriver().setup();
         driver = new EdgeDriver();
+        driver.get("http://localhost:8080/");
     }
 
     @Before
