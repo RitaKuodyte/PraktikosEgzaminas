@@ -6,10 +6,10 @@ import static org.junit.Assert.*;
 
 public class RegistrationTest extends BaseTest {
     final String userAlreadyExistsErrorMessage = "Toks vartotojo vardas jau egzistuoja";
-    final String minimumPasswordLenghtErrorMessage = "Šį laukelį būtina užpildyti\n" +
+    final String minimumPasswordLengthErrorMessage = "Šį laukelį būtina užpildyti\n" +
             "Privaloma įvesti bent 3 simbolius";
-    final String passwordsDoesntMatchErrorMessage = "Įvesti slaptažodžiai nesutampa";
-    final String usernameLenghtErrorMessage = "Šį laukelį būtina užpildyti\n" +
+    final String passwordsDoesNotMatchErrorMessage = "Įvesti slaptažodžiai nesutampa";
+    final String usernameLengthErrorMessage = "Šį laukelį būtina užpildyti\n" +
             "Privaloma įvesti nuo 3 iki 32 simbolių";
 
     RegistrationPage registrationPage = new RegistrationPage(driver);
@@ -47,7 +47,7 @@ public class RegistrationTest extends BaseTest {
         registrationPage.clickRegister();
         assertEquals(
                 "Page must show error message",
-                passwordsDoesntMatchErrorMessage,
+                passwordsDoesNotMatchErrorMessage,
                 registrationPage.getRegisterPasswordConfirmErrorMessage());
 
         registrationPage.fillUsername("");
@@ -56,7 +56,7 @@ public class RegistrationTest extends BaseTest {
         registrationPage.clickRegister();
         assertEquals(
                 "Page must show error message",
-                passwordsDoesntMatchErrorMessage,
+                passwordsDoesNotMatchErrorMessage,
                 registrationPage.getRegisterPasswordConfirmErrorMessage());
     }
 
@@ -68,11 +68,11 @@ public class RegistrationTest extends BaseTest {
         registrationPage.clickRegister();
         assertEquals(
                 "Page must show error message",
-                usernameLenghtErrorMessage,
+                usernameLengthErrorMessage,
                 registrationPage.getUsernameErrorMessage());
         assertEquals(
                 "Page must show error message about minimum symbol count",
-                minimumPasswordLenghtErrorMessage,
+                minimumPasswordLengthErrorMessage,
                 registrationPage.getRegisterPasswordErrorMessage());
 
         registrationPage.fillUsername("vartotojas123");
@@ -81,7 +81,7 @@ public class RegistrationTest extends BaseTest {
         registrationPage.clickRegister();
         assertEquals(
                 "Page must show error message about minimum symbol count",
-                minimumPasswordLenghtErrorMessage,
+                minimumPasswordLengthErrorMessage,
                 registrationPage.getRegisterPasswordErrorMessage());
     }
 
