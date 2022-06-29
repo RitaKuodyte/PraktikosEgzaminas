@@ -1,5 +1,6 @@
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
 import static org.junit.Assert.*;
 
@@ -33,6 +34,7 @@ public class RegistrationTest extends BaseTest {
     }
 
     @Test
+    @Category(ErrorMessageTests.class)
     public void ShowErrorPasswordsDoesntMatch() {
         registrationPage.fillUsername("");
         registrationPage.fillPassword("slaptazodis");
@@ -54,6 +56,7 @@ public class RegistrationTest extends BaseTest {
     }
 
     @Test
+    @Category(ErrorMessageTests.class)
     public void ShowErrorMinimumSymbolCount() {
         registrationPage.fillUsername("");
         registrationPage.fillPassword("");
@@ -81,6 +84,7 @@ public class RegistrationTest extends BaseTest {
     }
 
     @Test
+    @Category(ErrorMessageTests.class)
     public void ShowErrorUserExists() {
         registrationPage.fillUsername("admin");
         registrationPage.fillPassword("");
